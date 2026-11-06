@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đề thi giữa kì 1 Tiếng Anh 9 – Đề số 3</title>
+<style>
+:root{--blue:#2563eb;--navy:#172554;--bg:#f3f6fc;--green:#15803d;--red:#b91c1c}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#172033}
+header{background:linear-gradient(120deg,#1d4ed8,#6d28d9);color:white;padding:22px 16px;text-align:center}
+header h1{font-size:22px;margin:0 0 7px}header p{margin:0;font-size:14px}
+main{max-width:1050px;margin:20px auto;padding:0 14px}
+.panel,.section{background:white;border-radius:15px;padding:18px;margin-bottom:16px;box-shadow:0 4px 18px #17255412}
+input,button{font:inherit}input[type=password],input[type=text]{padding:12px;border:1px solid #cbd5e1;border-radius:9px;width:100%;max-width:460px}
+button{border:0;border-radius:9px;padding:11px 16px;background:var(--blue);color:white;font-weight:700;cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.5}.secondary{background:#64748b}.reset{background:#dc2626}
+.hidden{display:none!important}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:#e0e7ff;color:#1e3a8a}.tab.active{background:#1d4ed8;color:white}
+.section h2{font-size:19px;margin:0 0 8px;color:#1e3a8a}.score{font-weight:bold;color:#0f766e;margin:8px 0 14px}
+.question:not(.active){display:none}.question{border:1px solid #e2e8f0;border-radius:12px;padding:17px;margin:12px 0}
+.qnum{font-size:13px;color:#64748b;font-weight:bold}.qtext{font-size:17px;line-height:1.55;margin:8px 0 14px}
+.options{display:grid;gap:9px}.opt{display:block;text-align:left;width:100%;background:#f8fafc;color:#172033;border:1px solid #cbd5e1;font-weight:500}
+.opt:hover:not(:disabled){background:#eff6ff;border-color:#60a5fa}.opt.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}.opt.wrong{background:#fee2e2;border-color:#ef4444;color:#7f1d1d}
+.feedback{margin-top:13px;padding:12px;border-radius:9px;line-height:1.55;background:#f1f5f9}.feedback.good{background:#ecfdf5;color:#14532d}.feedback.bad{background:#fff1f2;color:#881337}
+.translation{margin-top:7px;color:#334155}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:15px}.nav button{min-width:105px}
+.reading-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.passage{height:390px;overflow:auto;background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:14px;line-height:1.6;white-space:pre-line}
+.passage h3{margin:0 0 8px;color:#1e3a8a}.question-side{height:390px;overflow:auto}
+.under{ text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;font-weight:bold}
+.write-answer{margin-top:12px}.write-answer input{max-width:none}
+.small{font-size:13px;color:#64748b}
+@media(max-width:720px){.reading-layout{grid-template-columns:1fr}.passage,.question-side{height:290px}.qtext{font-size:16px}header h1{font-size:19px}}
+</style>
+</head>
+<body>
+<header><h1>ĐỀ THI GIỮA KÌ 1 – TIẾNG ANH 9 GLOBAL SUCCESS</h1><p>ĐỀ SỐ 3 · Bỏ phần Listening · Chấm điểm và giải thích ngay</p></header>
+<main>
+<div id="login" class="panel">
+<h2>🔐 Enter password</h2><p>Nhập mật khẩu để bắt đầu làm bài.</p>
+<input id="pw" type="password" placeholder="Password" autocomplete="off">
+<p id="pwmsg" style="color:#b91c1c"></p><button onclick="unlock()">Start test</button>
+</div>
+<div id="exam" class="hidden">
+<div class="panel"><b>Hướng dẫn:</b> Mỗi câu chỉ được chọn một lần. Hệ thống chấm điểm và hiện giải thích ngay sau khi chọn. Mỗi phần có điểm và nút đặt lại riêng.</div>
+<div class="tabs" id="tabs"></div>
+<div id="sections"></div>
+</div>
+</main>
+<script>
+const sections = [
+{ id:"pron", title:"1. Pronunciation & Stress", qs:[
+{n:"3",q:'Which word has a different sound in the underlined part?',opts:['capsule','advent','damage','rare'],a:3,exp:'Âm “a” trong rare được phát âm /eə/, khác với âm /æ/ trong capsule, advent và damage.',tr:'Từ nào có phần gạch chân được phát âm khác với các từ còn lại?',under:true},
+{n:"4",q:'Which word has a different sound in the underlined part?',opts:['bother','worth','without','together'],a:1,exp:'“th” trong worth phát âm /θ/ (vô thanh); trong bother, without và together phát âm /ð/ (hữu thanh).',tr:'Từ nào có phần gạch chân được phát âm khác với các từ còn lại?',under:true},
+{n:"5",q:'Which word has a different stress pattern from the others?',opts:['career','option','nomad','modern'],a:0,exp:'career /kəˈrɪə(r)/ nhấn âm tiết thứ hai; option, nomad và modern nhấn âm tiết thứ nhất.',tr:'Từ nào có trọng âm khác với các từ còn lại?'},
+{n:"6",q:'Which word has a different stress pattern from the others?',opts:['identity','infrastructure','variety','convenience'],a:1,exp:'infrastructure nhấn âm tiết thứ nhất; identity, variety và convenience nhấn âm tiết thứ hai.',tr:'Từ nào có trọng âm khác với các từ còn lại?'}
+]},
+{ id:"grammar", title:"2. Vocabulary & Grammar", qs:[
+{n:"7",q:'This antique vase, which belongs ______ my grandmother, holds great sentimental value for my family.',opts:['with','to','at','for'],a:1,exp:'Cụm cố định: belong to = thuộc về. “Belongs to my grandmother” nghĩa là thuộc về bà tôi.',tr:'Chiếc bình cổ này, thuộc về bà tôi, có giá trị tình cảm rất lớn đối với gia đình tôi.'},
+{n:"8",q:'Food ______ during the political unrest are now threatened with long prison sentences.',opts:['providers','dwellers','hoarder','investors'],a:2,exp:'hoarder (n): người tích trữ. Food hoarders là những người tích trữ thực phẩm. Lưu ý câu gốc dùng danh từ số ít chưa thật khớp với động từ “are”; theo đáp án trang nguồn chọn C.',tr:'Những người tích trữ thực phẩm trong thời kỳ bất ổn chính trị hiện đang bị đe dọa phải chịu án tù dài hạn.'},
+{n:"9",q:'As a careful person, Ann always checks her timetable and makes sure she’s available before she ______ her time to a new project.',opts:['spends','avoids','hesitates','commits'],a:3,exp:'commit time to something = dành/cam kết dành thời gian cho việc gì. Đáp án D.',tr:'Là một người cẩn thận, Ann luôn kiểm tra thời gian biểu và đảm bảo mình có thời gian trước khi dành thời gian cho một dự án mới.'},
+{n:"10",q:'This job will provide you with ______ experience that may be helpful in the future.',opts:['fashionable','worthless','invaluable','popular'],a:2,exp:'invaluable = vô giá, cực kỳ quý giá. Cụm “invaluable experience” phù hợp nghĩa câu.',tr:'Công việc này sẽ mang lại cho bạn những kinh nghiệm vô giá có thể hữu ích trong tương lai.'},
+{n:"11",q:'As technology has advanced, young children are now well-equipped with ______ priced electronic gadgets.',opts:['usefully','popularly','competitively','unavoidably'],a:2,exp:'competitively priced = có mức giá cạnh tranh. Đây là cụm từ thường dùng khi nói về giá cả.',tr:'Khi công nghệ phát triển, trẻ nhỏ ngày nay được trang bị các thiết bị điện tử có mức giá cạnh tranh.'},
+{n:"12",q:'Jam: “Nobody in this room has seen James Cameron’s latest movie, ______?”',opts:['has it','hasn’t it','have it','haven’t it'],a:0,exp:'Với chủ ngữ nobody trong câu hỏi đuôi, dùng đại từ it và phần đuôi khẳng định: has it?',tr:'Jam: “Không ai trong phòng này đã xem bộ phim mới nhất của James Cameron, đúng không?”'},
+{n:"13",q:'John: “Luckily, the meeting ______ by the time we arrived there.”',opts:['just began','has just begun','would just begin','had just begun'],a:3,exp:'Past perfect (had + V3) diễn tả hành động đã xảy ra trước một thời điểm/hành động trong quá khứ: cuộc họp vừa bắt đầu trước khi chúng tôi đến.',tr:'John: “May mắn là cuộc họp vừa mới bắt đầu vào lúc chúng tôi đến đó.”'},
+{n:"14",q:'Becky: “It ______ a luxury, but now it’s a necessity.”',opts:['used to be','would be','was being','had been'],a:0,exp:'used to + V nguyên mẫu diễn tả trạng thái/thói quen từng đúng trong quá khứ nhưng hiện tại không còn nữa.',tr:'Becky: “Trước đây nó từng là thứ xa xỉ, nhưng bây giờ nó là thứ thiết yếu.”'},
+{n:"15",q:'Most students prefer to do little homework ______ many teachers find it useful.',opts:['while','as','however','because'],a:0,exp:'while = trong khi, dùng để nối hai ý tương phản: học sinh thích ít bài tập, trong khi giáo viên thấy bài tập hữu ích.',tr:'Hầu hết học sinh thích làm ít bài tập về nhà trong khi nhiều giáo viên thấy bài tập đó hữu ích.'},
+{n:"16",q:'Rose: “Which subject do you think is best: Music or Science?” Liam: “______ They’re totally different subjects.”',opts:['It’s very kind of you.','I think you should.','Thanks for your help.','It’s up to you.'],a:3,exp:'It’s up to you = tùy bạn quyết định. Đây là lời đáp phù hợp khi người nói không chọn thay người khác.',tr:'Rose: “Bạn nghĩ môn nào tốt hơn: Âm nhạc hay Khoa học?” Liam: “Tùy bạn thôi. Chúng là hai môn hoàn toàn khác nhau.”'}
+]},
+{ id:"cloze", title:"3. Cloze Test", passageTitle:"Passage: The military semester", passage:`Secondary students in Ho Chi Minh City have the option to take (17) ______ in the military semester organized by the Youth Union. This two-week program helps students prepare (18) ______ their future life. In the program, adolescents get the (19) ______ to learn basic knowledge about defense and security, national pride, heroic traditions of the Vietnam People’s Army, military discipline, as well as manners of a soldier.
+
+Moreover, young participants can get (20) ______ with community service in the afternoons, including (21) ______ after elderly people in the local nursing home, helping with the housework and planting trees. (22) ______ students have to get used to strict discipline, they say that they get a lot out of the program and their parents can’t help feeling happy to see their children’s improvement in understanding and behavior after joining the program.`, passageVi:`Học sinh trung học tại Thành phố Hồ Chí Minh có thể lựa chọn tham gia học kỳ quân sự do Đoàn Thanh niên tổ chức. Chương trình kéo dài hai tuần này giúp học sinh chuẩn bị cho cuộc sống tương lai. Trong chương trình, thanh thiếu niên có cơ hội học những kiến thức cơ bản về quốc phòng và an ninh, lòng tự hào dân tộc, truyền thống anh hùng của Quân đội nhân dân Việt Nam, kỷ luật quân đội cũng như phong thái của người lính.
+
+Hơn nữa, những người tham gia trẻ tuổi có thể cùng tham gia các hoạt động phục vụ cộng đồng vào buổi chiều, bao gồm chăm sóc người cao tuổi tại viện dưỡng lão địa phương, giúp việc nhà và trồng cây. Mặc dù học sinh phải làm quen với kỷ luật nghiêm ngặt, các em cho biết mình học hỏi được rất nhiều từ chương trình và cha mẹ không khỏi vui mừng khi thấy con tiến bộ về hiểu biết và hành vi sau khi tham gia.`,qs:[
+{n:"17",q:'Secondary students in Ho Chi Minh City have the option to take ______ in the military semester organized by the Youth Union.',opts:['role','part','time','side'],a:1,exp:'take part in = tham gia vào. Đây là cụm động từ cố định.',tr:'Học sinh trung học ở Thành phố Hồ Chí Minh có lựa chọn tham gia học kỳ quân sự do Đoàn Thanh niên tổ chức.'},
+{n:"18",q:'This two-week program helps students prepare ______ their future life.',opts:['to','at','for','with'],a:2,exp:'prepare for something = chuẩn bị cho điều gì.',tr:'Chương trình kéo dài hai tuần này giúp học sinh chuẩn bị cho cuộc sống tương lai.'},
+{n:"19",q:'In the program, adolescents get the ______ to learn basic knowledge about defense and security.',opts:['money','chance','spotlight','benefit'],a:1,exp:'get the chance to do something = có cơ hội làm việc gì.',tr:'Trong chương trình, thanh thiếu niên có cơ hội học những kiến thức cơ bản về quốc phòng và an ninh.'},
+{n:"20",q:'Moreover, young participants can get ______ with community service in the afternoons.',opts:['ready','accustomed','together','involved'],a:2,exp:'get together with = cùng tham gia/cùng nhau trong hoạt động. Đáp án C theo đáp án trang nguồn.',tr:'Hơn nữa, những người tham gia trẻ tuổi có thể tham gia các hoạt động phục vụ cộng đồng vào buổi chiều.'},
+{n:"21",q:'The activities include ______ after elderly people in the local nursing home.',opts:['looking','taking','putting','making'],a:0,exp:'look after = chăm sóc. Sau include dùng V-ing: looking after.',tr:'Các hoạt động bao gồm chăm sóc người cao tuổi tại viện dưỡng lão địa phương.'},
+{n:"22",q:'______ students have to get used to strict discipline, they say that they get a lot out of the program.',opts:['Although','Even','In contrast','However'],a:0,exp:'Although = mặc dù, đứng đầu mệnh đề phụ chỉ sự nhượng bộ. Cấu trúc: Although + clause, main clause.',tr:'Mặc dù học sinh phải làm quen với kỷ luật nghiêm ngặt, các em nói rằng mình học hỏi được rất nhiều từ chương trình.'}
+]},
+{ id:"reading", title:"4. Reading Comprehension", passageTitle:"Passage: Technology and our lives", passage:`While many people may not understand “Industry 4.0” and other technological changes, they are having a huge impact on almost every aspect of our lives. In the workplace, technology has improved efficiency and productivity of our work. Since the Third Industrial Revolution, which dates back to the 1970s, numerous routine and repetitive tasks have been conducted automatically without human assistance so that employees are freed up to focus on more important and creative tasks.
+
+Advanced software and tools facilitate the practice of working from home. Video conferencing platforms like Zoom and Microsoft Teams make it possible to collaborate across continents in real time without worrying about geographical distances. This flexibility has opened up opportunities for companies to hire the best talent regardless of their geographical locations.
+
+Additionally, the advent of the internet has brought about drastic changes in communicative methods. Through social media platforms like Facebook, Twitter and Instagram, we can make friends with people having common interests around the world, keep in touch with distant relatives and friends, and stay informed about global events. This gives rise to new forms of social interaction and community-building where everyone can interact, share experiences and build networks.
+
+When it comes to how we travel around the city, ride-hailing apps are of great benefit. Apps like GoJek, GrabBike and Xanh SM allow users to book motorbike taxis through their smartphones, view fare estimates and track the arrival of their driver in real time. These services offer a convenient, efficient and often cost-effective way to travel in congested urban areas, compared to traditional motorbike taxis.`, passageVi:`Mặc dù nhiều người có thể không hiểu “Công nghiệp 4.0” và những thay đổi công nghệ khác, chúng đang tác động rất lớn đến hầu hết mọi khía cạnh trong cuộc sống. Tại nơi làm việc, công nghệ đã cải thiện hiệu quả và năng suất công việc. Kể từ cuộc Cách mạng Công nghiệp lần thứ ba, bắt đầu từ những năm 1970, nhiều công việc thường ngày và lặp đi lặp lại đã được tự động hóa mà không cần sự trợ giúp của con người, nhờ đó nhân viên có thể tập trung vào những nhiệm vụ quan trọng và sáng tạo hơn.
+
+Các phần mềm và công cụ tiên tiến tạo điều kiện thuận lợi cho việc làm việc tại nhà. Các nền tảng hội nghị truyền hình như Zoom và Microsoft Teams giúp mọi người cộng tác xuyên lục địa theo thời gian thực mà không phải lo lắng về khoảng cách địa lý. Sự linh hoạt này đã mở ra cơ hội để các công ty tuyển dụng những nhân tài giỏi nhất bất kể vị trí địa lý của họ.
+
+Ngoài ra, sự xuất hiện của Internet đã đem lại những thay đổi mạnh mẽ trong phương thức giao tiếp. Thông qua các nền tảng mạng xã hội như Facebook, Twitter và Instagram, chúng ta có thể kết bạn với những người có cùng sở thích trên khắp thế giới, giữ liên lạc với người thân và bạn bè ở xa, đồng thời cập nhật các sự kiện toàn cầu. Điều này tạo ra những hình thức tương tác xã hội và xây dựng cộng đồng mới, nơi mọi người có thể tương tác, chia sẻ kinh nghiệm và xây dựng mạng lưới quan hệ.
+
+Về cách di chuyển trong thành phố, các ứng dụng gọi xe mang lại nhiều lợi ích. Các ứng dụng như GoJek, GrabBike và Xanh SM cho phép người dùng đặt xe ôm qua điện thoại thông minh, xem giá cước ước tính và theo dõi thời gian tài xế đến theo thời gian thực. So với xe ôm truyền thống, các dịch vụ này mang đến cách di chuyển thuận tiện, hiệu quả và thường tiết kiệm chi phí hơn tại các khu đô thị đông đúc.`,qs:[
+{n:"31",q:'People can work effectively and efficiently thanks to technological advances.',opts:['True','False'],a:0,exp:'Đúng. Bài đọc nêu rõ công nghệ đã cải thiện hiệu quả và năng suất công việc.',tr:'Mọi người có thể làm việc hiệu quả nhờ những tiến bộ công nghệ.'},
+{n:"32",q:'Teleconferencing helps reduce physical travel.',opts:['True','False'],a:0,exp:'Đúng. Hội nghị truyền hình cho phép cộng tác xuyên lục địa theo thời gian thực mà không cần lo khoảng cách địa lý.',tr:'Hội nghị truyền hình giúp giảm việc phải di chuyển trực tiếp.'},
+{n:"33",q:'Social networking sites connect people from different countries.',opts:['True','False'],a:0,exp:'Đúng. Mạng xã hội giúp kết bạn với những người có cùng sở thích trên khắp thế giới.',tr:'Các trang mạng xã hội kết nối mọi người từ những quốc gia khác nhau.'},
+{n:"34",q:'Moving around in traditional motorbike taxis is much cheaper than using technology-based riding services.',opts:['True','False'],a:1,exp:'Sai. Bài đọc nói các dịch vụ gọi xe công nghệ thường tiết kiệm chi phí hơn so với xe ôm truyền thống.',tr:'Di chuyển bằng xe ôm truyền thống rẻ hơn nhiều so với sử dụng dịch vụ gọi xe công nghệ.'},
+{n:"35",q:'What is NOT mentioned as an aspect of our lives affected by technology?',opts:['Working methods','Communication','Food ordering','Transportation'],a:2,exp:'Đặt đồ ăn (food ordering) không được đề cập. Bài đọc nói về cách làm việc, giao tiếp và giao thông.',tr:'Khía cạnh nào trong cuộc sống KHÔNG được đề cập là chịu ảnh hưởng của công nghệ?'},
+{n:"36",q:'What can be inferred from the passage about the effects of technology?',opts:['Technology was first introduced in the late 20th century.','Social networks enable global connection.','Zoom is a cost-effective video conference platform.','People using traditional motorbike taxis know how much they pay for their journey.'],a:1,exp:'Có thể suy ra mạng xã hội tạo điều kiện kết nối toàn cầu vì người dùng có thể kết bạn, giữ liên lạc với người ở xa và cập nhật sự kiện thế giới.',tr:'Có thể suy ra điều gì từ bài đọc về tác động của công nghệ?'}
+]},
+{ id:"order", title:"5. Sentence Arrangement", qs:[
+{n:"24",q:'Arrange the sentences to make a meaningful paragraph.\\n\\na. Vietnamese families at that time ate rice, vegetables and fish for survival.\\nb. Before the 1960s, Việt Nam relied heavily on agriculture.\\nc. This led to their sense of community and beliefs in working hard, appreciating farmland.\\nd. As rice was their main crop, they chose to settle in fertile river valleys.\\ne. They also liked to live near their relatives in simple bamboo and straw-roofed houses.',opts:['d – e – c – b – a','c – b – a – e – d','e – d – b – a – c','b – a – d – e – c'],a:3,exp:'Trình tự hợp lý: b nêu bối cảnh nông nghiệp; a nói về thức ăn; d giải thích nơi định cư; e bổ sung cách sống; c kết luận bằng “This”.',tr:'Sắp xếp các câu để tạo thành một đoạn văn có nghĩa.'},
+{n:"25",q:'Arrange the sentences to make a meaningful paragraph.\\n\\na. Previously, kids mostly played outdoors.\\nd. The games were simple and cost little because they made their own toys from natural materials.\\ne. Moreover, children of our grandparents’ generation left school early to support their families.\\nc. On the other hand, children nowadays have more freedom of choice.\\nb. Also, most of their leisure games depend on electronic devices.',opts:['c – e – a – b – d','a – d – e – c – b','d – c – b – e – a','b – d – a – e – c'],a:1,exp:'Đáp án B: a giới thiệu trò chơi ngày xưa; d giải thích đặc điểm trò chơi; e bổ sung về thế hệ ông bà; c chuyển ý sang trẻ em ngày nay; b bổ sung đặc điểm hiện nay.',tr:'Sắp xếp các câu để tạo thành một đoạn văn có nghĩa.'}
+]},
+{ id:"writing", title:"6. Sentence Transformation", written:[
+{n:"39",q:'This is the first time I have ever used this app. (TRIED)\\nBegin with: Never ...',answer:'Never have I tried this app before.',exp:'Đảo ngữ với never: Never + trợ động từ + chủ ngữ + động từ chính. “This is the first time...” tương đương “Never have I ... before.”',tr:'Đây là lần đầu tiên tôi sử dụng ứng dụng này.'},
+{n:"40",q:'They postponed the meeting until tomorrow because the weather was bad. (PUT)\\nBegin with: The meeting ... to the bad weather.',answer:'The meeting was put off until tomorrow due to the bad weather.',exp:'put off = hoãn. Chuyển sang bị động: The meeting was put off... “because the weather was bad” đổi thành “due to the bad weather”.',tr:'Họ hoãn cuộc họp đến ngày mai vì thời tiết xấu.'}
+]}
+];
+function unlock(){if(document.getElementById('pw').value==='367'){document.getElementById('login').classList.add('hidden');document.getElementById('exam').classList.remove('hidden');render()}else document.getElementById('pwmsg').textContent='Incorrect password. Try again.'}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+let active=0, states={};
+function key(s,i){return s.id+'_'+i}
+function render(){
+ const tabs=document.getElementById('tabs'),root=document.getElementById('sections');tabs.innerHTML='';root.innerHTML='';
+ sections.forEach((s,si)=>{
+  states[s.id]=s.qs?s.qs.map(()=>null):s.written.map(()=>null);
+  let b=document.createElement('button');b.className='tab'+(si===active?' active':'');b.textContent=s.title;b.onclick=()=>{active=si;renderView()};tabs.appendChild(b);
+  let sec=document.createElement('div');sec.className='section'+(si===active?'':' hidden');sec.id='sec_'+s.id;
+  sec.innerHTML=`<h2>${s.title}</h2><div class="score" id="score_${s.id}">Score: 0 / ${s.qs?s.qs.length:s.written.length}</div><button class="reset" onclick="resetSection('${s.id}')">Reset this section</button>`;
+  if(s.passage){sec.innerHTML+=`<div class="reading-layout"><div class="passage"><h3>${s.passageTitle}</h3>${s.passage}<hr><b>Vietnamese translation</b><br>${s.passageVi}</div><div class="question-side" id="side_${s.id}"></div></div>`}
+  else sec.innerHTML+=`<div id="side_${s.id}"></div>`;
+  root.appendChild(sec);
+  const target=sec.querySelector('#side_'+s.id);
+  if(s.qs) s.qs.forEach((q,i)=>target.appendChild(makeQuestion(s,q,i)));
+  if(s.written) s.written.forEach((q,i)=>target.appendChild(makeWritten(s,q,i)));
+ });
+}
+function renderView(){sections.forEach((s,i)=>{document.getElementById('sec_'+s.id).classList.toggle('hidden',i!==active);document.querySelectorAll('.tab')[i].classList.toggle('active',i===active)})}
+function makeQuestion(s,q,i){
+ let box=document.createElement('div');box.className='question'+(i===0?' active':'');box.id='q_'+s.id+'_'+i;
+ let question=q.q.replace(/\\n/g,'<br>');
+ if(s.id==='pron' && q.under){let opts=q.opts.map((v,j)=>j===3&&q.n==='3'?v.replace('a','<span class="under">a</span>'):q.n==='4'?v.replace('th','<span class="under">th</span>'):v);q._opts=opts}
+ box.innerHTML=`<div class="qnum">QUESTION ${q.n}</div><div class="qtext">${question}</div><div class="options"></div><div class="feedback hidden" id="fb_${s.id}_${i}"></div><div class="nav"><button class="secondary" onclick="moveQuestion('${s.id}',${i},-1)" ${i===0?'disabled':''}>Previous</button><span class="small">${i+1} / ${s.qs.length}</span><button onclick="moveQuestion('${s.id}',${i},1)" ${i===s.qs.length-1?'disabled':''}>Next</button></div>`;
+ let opts=box.querySelector('.options');(q._opts||q.opts).forEach((v,j)=>{let btn=document.createElement('button');btn.className='opt';btn.innerHTML=String.fromCharCode(65+j)+'. '+v;btn.onclick=()=>choose(s,q,i,j);opts.appendChild(btn)});
+ return box;
+}
+function choose(s,q,i,j){
+ if(states[s.id][i]!==null)return;states[s.id][i]=j;
+ let box=document.getElementById('q_'+s.id+'_'+i),buttons=[...box.querySelectorAll('.opt')];
+ buttons.forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('correct');if(k===j&&j!==q.a)b.classList.add('wrong')});
+ let good=j===q.a,fb=document.getElementById('fb_'+s.id+'_'+i);fb.className='feedback '+(good?'good':'bad');fb.classList.remove('hidden');
+ fb.innerHTML=`<b>${good?'Correct!':'Incorrect.'}</b> Đáp án đúng: <b>${String.fromCharCode(65+q.a)}. ${q.opts[q.a]}</b><div>${q.exp}</div><div class="translation"><b>Nghĩa tiếng Việt:</b> ${q.tr}</div>`;
+ updateScore(s);
+}
+function makeWritten(s,q,i){
+ let box=document.createElement('div');box.className='question'+(i===0?' active':'');box.id='q_'+s.id+'_'+i;
+ box.innerHTML=`<div class="qnum">QUESTION ${q.n}</div><div class="qtext">${q.q.replace(/\\n/g,'<br>')}</div><div class="write-answer"><input type="text" id="ans_${s.id}_${i}" placeholder="Type your answer here"></div><div style="margin-top:10px"><button onclick="checkWritten('${s.id}',${i})" id="submit_${s.id}_${i}">Check answer</button></div><div class="feedback hidden" id="fb_${s.id}_${i}"></div><div class="nav"><button class="secondary" onclick="moveQuestion('${s.id}',${i},-1)" ${i===0?'disabled':''}>Previous</button><span class="small">${i+1} / ${s.written.length}</span><button onclick="moveQuestion('${s.id}',${i},1)" ${i===s.written.length-1?'disabled':''}>Next</button></div>`;
+ return box;
+}
+function norm(x){return x.toLowerCase().trim().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ')}
+function checkWritten(id,i){
+ let s=sections.find(x=>x.id===id),q=s.written[i];if(states[id][i]!==null)return;
+ let val=document.getElementById('ans_'+id+'_'+i).value;if(!val.trim())return;
+ let good=norm(val)===norm(q.answer);states[id][i]=good?1:0;
+ document.getElementById('ans_'+id+'_'+i).disabled=true;document.getElementById('submit_'+id+'_'+i).disabled=true;
+ let fb=document.getElementById('fb_'+id+'_'+i);fb.className='feedback '+(good?'good':'bad');fb.classList.remove('hidden');
+ fb.innerHTML=`<b>${good?'Correct!':'Not quite.'}</b><div><b>Suggested answer:</b> ${q.answer}</div><div>${q.exp}</div><div class="translation"><b>Nghĩa tiếng Việt:</b> ${q.tr}</div>`;
+ updateScore(s);
+}
+function updateScore(s){
+ let vals=states[s.id],score=vals.reduce((a,v)=>a+(v===null?0:(s.qs?(v===s.qs[vals.indexOf(v)]?1:0):v)),0);
+ // MC stores selected index; calculate by reading correctness marker, written stores 1/0
+ if(s.qs) score=vals.reduce((a,v,i)=>a+(v===null?0:(v===s.qs[i].a?1:0)),0);
+ document.getElementById('score_'+s.id).textContent=`Score: ${score} / ${vals.length} · Answered: ${vals.filter(v=>v!==null).length}/${vals.length}`;
+}
+function moveQuestion(id,i,dir){let s=sections.find(x=>x.id===id),n=s.qs?s.qs.length:s.written.length;let next=Math.max(0,Math.min(n-1,i+dir));for(let k=0;k<n;k++)document.getElementById('q_'+id+'_'+k).classList.toggle('active',k===next);document.getElementById('q_'+id+'_'+next).scrollIntoView({behavior:'smooth',block:'start'})}
+function resetSection(id){
+ let s=sections.find(x=>x.id===id);states[id]=s.qs?s.qs.map(()=>null):s.written.map(()=>null);
+ let side=document.getElementById('side_'+id);side.innerHTML='';
+ if(s.qs)s.qs.forEach((q,i)=>side.appendChild(makeQuestion(s,q,i)));if(s.written)s.written.forEach((q,i)=>side.appendChild(makeWritten(s,q,i)));
+ document.getElementById('score_'+id).textContent=`Score: 0 / ${states[id].length}`;
+}
+</script>
+</body></html>
